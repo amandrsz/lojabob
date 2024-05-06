@@ -50,7 +50,7 @@ function apagar(id){
     let sql = "delete from users where id = ?"
     connection.query(sql,id,function(error,results,fields){
         if(error) throw error 
-        console.log 
+        console.log("apagados com sucesso!" + id) 
 
 
     })
