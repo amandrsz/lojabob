@@ -20,7 +20,45 @@ connection.query(sql,dados, function(error,results,fields){
 })
 }
 
-inserir("amanda","12345","amanda@gmail.com")
+//selecionar dados por id - select nometabela
+function selecionarPorId(id){
+    let sql = "select * from users where id = ?"
+    connection.query(sql,id,function(error, results,fields) {
+        if(error) throw error 
+        console.log("selecionado: " + results [0].id + "."+ results[0].login +
+                                                            "."+ results[0].email)
+        })
+    }
 
+    //selecionar todos os dados - select nometabela
+function selecionarTudo(id){
+    let sql = "select * from users"
+    connection.query(sql,id,function(error, results,fields) {
+        
+        for(let i=0;i<results.length;i++){
+
+        if(error) throw error 
+        console.log("selecionado: " + results [i].id + ":"+ results[i].login +
+                                                            ":"+ results[i].email)
+        }
+})
+
+}
+
+//apagar dados - delete from nometabela
+function apagar(id){
+    let sql = "delete from users where id = ?"
+    connection.query(sql,id,function(error,results,fields){
+        if(error) throw error 
+        console.log 
+
+
+    })
+
+
+}
+
+
+//inserir ("amanda","12345","amanda@gmail.com")
 
 connection.end()
