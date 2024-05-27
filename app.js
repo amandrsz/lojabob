@@ -1,4 +1,4 @@
-const mysql = require ('mysql2')
+const mysql = require('mysql2')
 
 const connection = mysql.createConnection({
     host: 'sql10.freemysqlhosting.net',
@@ -9,56 +9,46 @@ const connection = mysql.createConnection({
 
 connection.connect()
 
-//inserir dados - insert into nometabela 
-function inserir (lg,sn,mail){
+//Inserir dados - insert into nometabela
+function inserir(lg,sn,mail) {
     let sql = "insert into users set ?"
     let dados = {login:lg,senha:sn,email:mail}
 
-connection.query(sql,dados, function(error,results,fields){
-   if(error) throw error 
-   console.log("cadastro com sucesso!")
-})
+    connection.query(sql,dados, function(error,results,fields){
+        if(error) throw error
+        console.log("Cadastro com sucesso!")
+    })
 }
-
-//selecionar dados por id - select nometabela
-function selecionarPorId(id){
+//Selecionar dados por id - select nometabela
+function selectionPorId(id){
     let sql = "select * from users where id = ?"
-    connection.query(sql,id,function(error, results,fields) {
-        if(error) throw error 
-        console.log("selecionado: " + results [0].id + "."+ results[0].login +
-                                                            "."+ results[0].email)
-        })
-    }
-
-    //selecionar todos os dados - select nometabela
-function selecionarTudo(id){
-    let sql = "select * from users"
-    connection.query(sql,id,function(error, results,fields) {
-        
+    connection.query(sql,id,function(error,results,fields){
         for(let i=0;i<results.length;i++){
-
-        if(error) throw error 
-        console.log("selecionado: " + results [i].id + ":"+ results[i].login +
-                                                            ":"+ results[i].email)
+        if(error) throw error
+        console.log("Selecionado " + results[i].id + ":" + results[i].login + ":" + results[i].email)
         }
-})
-
+    })
 }
 
-//apagar dados - delete from nometabela
+function selecionarTudo(){
+    let sql = "select * from users where id = ?"
+    connection.query(sql,function(error,results,fields){
+        for(let i=0;<results.lenght;i++) {
+        if(error) throw error
+        console.log("Selecionado:" + results[i].id + ":" + results [i].login + ":" + results[i].email)
+
+        }    
+    })
+}
+
+//Apagar dados -  delete from nometabela
 function apagar(id){
     let sql = "delete from users where id = ?"
     connection.query(sql,id,function(error,results,fields){
-        if(error) throw error 
-        console.log("apagados com sucesso!" + id) 
-
-
-    })
-
-
+        if (error) throw error
+        console.log("Apagado com sucesso!" + id)
+    }
 }
 
-
-//inserir ("amanda","12345","amanda@gmail.com")
 
 connection.end()
